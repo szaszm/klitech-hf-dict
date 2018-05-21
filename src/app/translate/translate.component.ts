@@ -24,8 +24,8 @@ export class TranslateComponent implements OnInit {
 
   doTranslate(): void {
     this.results = this.searchService.searchSourceSearchLanguageTranslationstargetSearchLanguageGet(
-        this.sourceLanguageId, this.targetLanguageId, AppConfig.APP_ID, AppConfig.APP_KEY, this.query, false,
-        undefined, '1'
+        this.sourceLanguageId, this.targetLanguageId, AppConfig.APP_ID, AppConfig.APP_KEY,
+        this.query.split(' ')[0].trim(), false, undefined, '1'
       ).pipe(
         rx.map(x => x.results[0]),
         rx.flatMap(x =>

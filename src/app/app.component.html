@@ -1,31 +1,35 @@
-<app-toolbar></app-toolbar>
+<mat-toolbar><h1>Dictionary</h1></mat-toolbar>
 
 <mat-tab-group>
+  <mat-tab label="Translate" class="tab-translate">
+    <mat-grid-list cols="2" rowHeight="4:1">
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-select placeholder="Source language" [(ngModel)]="sourceLanguageId" (ngModelChange)='checkBilingualDictionaryAvailability($event, targetLanguageId)'>
+            <mat-option *ngFor="let lng of availableSourceLanguages | async" [value]="lng">
+              {{ lng }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
 
-  <mat-tab label="Translate">
-    <mat-form-field>
-      <mat-select placeholder="Source language" [(ngModel)]="sourceLanguageId" (ngModelChange)='checkBilingualDictionaryAvailability($event, targetLanguageId)'>
-        <mat-option *ngFor="let lng of availableSourceLanguages | async" [value]="lng">
-          {{ lng }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-select placeholder="Target language" [(ngModel)]="targetLanguageId" (ngModelChange)='checkBilingualDictionaryAvailability(sourceLanguageId, $event)'>
+            <mat-option *ngFor="let lng of availableTargetLanguages | async " [value]="lng">
+              {{ lng }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
 
-    <mat-form-field>
-      <mat-select placeholder="Target language" [(ngModel)]="targetLanguageId" (ngModelChange)='checkBilingualDictionaryAvailability(sourceLanguageId, $event)'>
-        <mat-option *ngFor="let lng of availableTargetLanguages | async " [value]="lng">
-          {{ lng }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
+    </mat-grid-list>
     <p *ngIf="!bilingualDictionaryAvailable">No dictionary available for the chosen pair of languages. Try others!</p>
 
     <app-translate *ngIf="bilingualDictionaryAvailable" [sourceLanguageId]="sourceLanguageId" [targetLanguageId]="targetLanguageId"></app-translate>
   </mat-tab>
 
   <mat-tab label="Lookup">
-
+    TODO
   </mat-tab>
-
 </mat-tab-group>

@@ -11,10 +11,9 @@ import { MatListModule,
   MatToolbarModule,
   MatTabsModule,
   MatButtonModule,
-  MatInputModule } from '@angular/material';
+  MatInputModule, 
+  MatGridListModule} from '@angular/material';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { RouterModule, Routes } from '@angular/router';
-import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { TransformPipe } from './transform.pipe';
 import { UniqPipe } from './uniq.pipe';
@@ -42,11 +41,11 @@ import { LexicalEntryComponent } from './lexical-entry/lexical-entry.component';
     MatSelectModule,
     MatCardModule,
     MatToolbarModule,
-    AppRoutingModule,
     MatTabsModule,
     FormsModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatGridListModule
   ],
   providers: [
     {

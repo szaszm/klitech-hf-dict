@@ -5,8 +5,9 @@
 </mat-form-field>
 <button mat-button (click)="doTranslate()">Translate</button>
 
-<div>
-  <div *ngFor="let res of results | async">
-    result: {{ res.word }}
-  </div>
-</div>
+<mat-list>
+  <ng-container *ngFor="let res of results | async; let idx = index">
+    <mat-divider *ngIf="idx != 0"></mat-divider>
+    <mat-list-item><app-lexical-entry [lexicalEntry]="res"></app-lexical-entry></mat-list-item>
+  </ng-container>
+</mat-list>

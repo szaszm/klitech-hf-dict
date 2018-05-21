@@ -37,13 +37,13 @@ export class AppComponent implements OnInit {
     );
 
     this.availableTargetLanguages = this.languages.pipe(
-      rx.map(x => _.map(
+      rx.map(x => _.uniq(_.map(
         _.filter(x,
           y => y.sourceLanguage
               // && (y.sourceLanguage.id === this.sourceLanguageId || !this.sourceLanguageId)
               && y.targetLanguage),
           y => y.targetLanguage.id)
-        )
+        ))
     );
   }
 

@@ -1,3 +1,10 @@
-<p>
-  {{ lexicalEntry.text }}
-</p>
+<mat-card>
+    <mat-card-title>{{ getTranslation() }}</mat-card-title>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item *ngFor="let ex of getExamples()">
+          example: {{ ex.text }} - {{ ex.translations[0].text }}
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+</mat-card>
