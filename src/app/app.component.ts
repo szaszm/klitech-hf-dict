@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { LanguagesResults, UtilityService } from './oxford-dict';
 import * as rx from 'rxjs/operators';
 import * as _ from 'lodash';
+import { AppConfig } from './app.config';
 
 
 
@@ -12,23 +13,19 @@ import * as _ from 'lodash';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  private app_key = '694401321b4b843bca89ddc5cd27a6a8';
-  private app_id = '58f5bfc5';
-
   sourceLanguageId: string = undefined;
   targetLanguageId: string = undefined;
 
-  title = 'Oxford Dictionaries Client';
   languages: Observable<Array<LanguagesResults>>;
 
   availableSourceLanguages: Observable<Array<string>>;
   availableTargetLanguages: Observable<Array<string>>;
   bilingualDictionaryAvailable = false;
 
-  public constructor(private distUtilService: UtilityService) {}
+  public constructor(private dictUtilService: UtilityService) {}
 
   ngOnInit(): void {
-    this.languages = this.distUtilService.languagesGet(this.app_id, this.app_key)
+    this.languages = this.dictUtilService.languagesGet(AppConfig.APP_ID, AppConfig.APP_KEY)
       .pipe(rx.map(x => x.results))
     ;
     this.availableSourceLanguages = this.languages.pipe(
@@ -51,20 +48,26 @@ export class AppComponent implements OnInit {
   }
 
   checkBilingualDictionaryAvailability(srcOverride: string, tgtOverride: string): Observable<boolean> {
-    let obsrv;
+    let obsrv: Observable<boolean>;
     srcOverride = srcOverride || this.sourceLanguageId;
     tgtOverride = tgtOverride || this.targetLanguageId;
-    if(!srcOverride || !tgtOverride) {
+    if (!srcOverride || !tgtOverride) {
       obsrv = of(false);
     } else {
-      obsrv = this.distUtilService.languagesGet(this.app_id, this.app_key, srcOverride, tgtOverride)
+      obsrv = this.dictUtilService.languagesGet(AppConfig.APP_ID, AppConfig.APP_KEY, srcOverride, tgtOverride)
         .pipe(
           rx.map(x => x.results.length > 0)
         );
     }
 
-    obsrv.subscribe(x => console.log(this.bilingualDictionaryAvailable = x));
-    obsrv.subscribeOnError(x => { console.log(x); /*throw x;*/ });
+    const subscription = obsrv.subscribe(x => {
+      console.log(this.bilingualDictionaryAvailable = x);
+      if (subscription) { subscription.unsubscribe(); }
+    });
+    // obsrv.subscribeOnError(x => { console.log(x); /*throw x;*/ });
+
+    // Pretend the dictionary is unavailable until we get a response
+    this.bilingualDictionaryAvailable = false;
 
     return obsrv;
   }

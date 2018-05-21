@@ -4,7 +4,14 @@ import { NgModule, Provider, APP_INITIALIZER } from '@angular/core';
 import { AppComponent } from './app.component';
 import { ApiModule, Configuration, BASE_PATH } from './oxford-dict/index';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatListModule, MatSelect, MatSelectModule, MatCardModule, MatToolbarModule, MatTabsModule } from '@angular/material';
+import { MatListModule,
+  MatSelect,
+  MatSelectModule,
+  MatCardModule,
+  MatToolbarModule,
+  MatTabsModule,
+  MatButtonModule,
+  MatInputModule } from '@angular/material';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +19,8 @@ import { FormsModule } from '@angular/forms';
 import { TransformPipe } from './transform.pipe';
 import { UniqPipe } from './uniq.pipe';
 import { FilterPipe } from './filter.pipe';
+import { TranslateComponent } from './translate/translate.component';
+import { LexicalEntryComponent } from './lexical-entry/lexical-entry.component';
 
 
 
@@ -21,7 +30,9 @@ import { FilterPipe } from './filter.pipe';
     ToolbarComponent,
     TransformPipe,
     UniqPipe,
-    FilterPipe
+    FilterPipe,
+    TranslateComponent,
+    LexicalEntryComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +44,9 @@ import { FilterPipe } from './filter.pipe';
     MatToolbarModule,
     AppRoutingModule,
     MatTabsModule,
-    FormsModule
+    FormsModule,
+    MatInputModule,
+    MatButtonModule
   ],
   providers: [
     {

@@ -1,0 +1,12 @@
+<h1>Translate</h1>
+
+<mat-form-field>
+  <textarea matInput placeholder="Word to look up" [(ngModel)]="query"></textarea>
+</mat-form-field>
+<button mat-button (click)="doTranslate()">Translate</button>
+
+<div>
+  <div *ngFor="let res of results | async">
+    result: {{ res.word }}
+  </div>
+</div>

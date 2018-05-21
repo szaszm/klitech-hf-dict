@@ -19,9 +19,9 @@
       </mat-select>
     </mat-form-field>
 
-    <p>source language: {{ sourceLanguageId }}</p>
-    <p>target language: {{ targetLanguageId }}</p>
-    <p>available: {{ bilingualDictionaryAvailable }}</p>
+    <p *ngIf="!bilingualDictionaryAvailable">No dictionary available for the chosen pair of languages. Try others!</p>
+
+    <app-translate *ngIf="bilingualDictionaryAvailable" [sourceLanguageId]="sourceLanguageId" [targetLanguageId]="targetLanguageId"></app-translate>
   </mat-tab>
 
   <mat-tab label="Lookup">
