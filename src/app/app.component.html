@@ -29,7 +29,19 @@
     <app-translate *ngIf="bilingualDictionaryAvailable" [sourceLanguageId]="sourceLanguageId" [targetLanguageId]="targetLanguageId"></app-translate>
   </mat-tab>
 
-  <mat-tab label="Lookup">
-    TODO
+  <mat-tab label="Synonyms/Atonyms">
+    <h1>Synonym and atonym lookup</h1>
+
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="Language" [(ngModel)]="sourceLanguageId" (ngModelChange)='checkBilingualDictionaryAvailability($event, targetLanguageId)'>
+          <mat-option *ngFor="let lng of availableSourceLanguages | async" [value]="lng">
+            {{ lng }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <app-synonym [languageId]="sourceLanguageId"></app-synonym>
   </mat-tab>
 </mat-tab-group>

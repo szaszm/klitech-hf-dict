@@ -1,1 +1,11 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.syn-anto-cols {
+    display: flex;
+    align-content: space-around;
+    width: 100%;
+}
+
+.syn-anto-cols > div {
+    flex: 1;
+}

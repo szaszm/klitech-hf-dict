@@ -20,6 +20,7 @@ import { UniqPipe } from './uniq.pipe';
 import { FilterPipe } from './filter.pipe';
 import { TranslateComponent } from './translate/translate.component';
 import { LexicalEntryComponent } from './lexical-entry/lexical-entry.component';
+import { SynonymComponent } from './synonym/synonym.component';
 
 
 
@@ -31,7 +32,8 @@ import { LexicalEntryComponent } from './lexical-entry/lexical-entry.component';
     UniqPipe,
     FilterPipe,
     TranslateComponent,
-    LexicalEntryComponent
+    LexicalEntryComponent,
+    SynonymComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,35 @@
+
+<mat-form-field>
+  <textarea matInput placeholder="Word to look up" [(ngModel)]="query"></textarea>
+</mat-form-field>
+<button mat-button (click)="doLookup()">Look up</button>
+
+<div class="syn-anto-cols" *ngIf="!incompleteQuery">
+  <div>
+    <h2>Synonyms</h2>
+    <div>
+      <div *ngFor="let synonym of synonyms | async;  let idx = index">
+        <mat-divider *ngIf="idx != 0"></mat-divider>
+        <div *ngIf="synonym.examples[0].definitions">{{ synonym.examples[0].definitions[0] }}</div>
+        <div *ngFor="let syn of synonym.synonyms; let idx_ = index">
+            <mat-divider *ngIf="idx_ != 0"></mat-divider>
+            <p>{{ syn.text }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <h2>Antonyms</h2>
+    <div>
+      <div *ngFor="let antonym of antonyms | async;  let idx = index">
+        <mat-divider *ngIf="idx != 0"></mat-divider>
+        <div *ngIf="antonym.examples[0].definitions">{{ antonym.examples[0].definitions[0] }}</div>
+        <div *ngFor="let ato of antonym.antonyms; let idx_ = index">
+            <mat-divider *ngIf="idx_ != 0"></mat-divider>
+            <p>{{ ato.text }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
